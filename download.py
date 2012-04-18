@@ -17,11 +17,12 @@ while True:
     continue
 
   track = requests.get('http://api.soundcloud.com/tracks/%s/stream?consumer_key=%s' % (id, config['consumer_key']))
-  output = open('mp3/%s.mp3' % id, 'wb')
+  output = open('/tmp/%s.mp3' % id, 'wb')
   chunks = track.iter_content(chunk_size=1048576)
 
   for chunk in chunks:
     output.write(chunk)
 
   output.close()
+  os.rename('/tmp/%s.mp3' % id, 'mp3/%s.mp3' % id)
   job.delete()

@@ -12,7 +12,7 @@ while True:
   job = b.reserve()
   id, artist, title, twitter = pickle.loads(job.body)
 
-  if os.path.isfile('mp3/%s.mp3' % id) is True:
+  if os.path.isfile('../mp3/%s.mp3' % id) is True:
     job.delete()
     continue
 
@@ -24,5 +24,5 @@ while True:
     output.write(chunk)
 
   output.close()
-  os.rename('/tmp/%s.mp3' % id, 'mp3/%s.mp3' % id)
+  os.rename('/tmp/%s.mp3' % id, '../mp3/%s.mp3' % id)
   job.delete()

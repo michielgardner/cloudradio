@@ -3,7 +3,7 @@ import pickle
 import beanstalkc
 
 b = beanstalkc.Connection()
-data = open('db/playlist.pkl', 'rb')
+data = open('../db/playlist.pkl', 'rb')
 playlist = pickle.load(data)
 
 data.close()

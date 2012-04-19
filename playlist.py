@@ -16,7 +16,7 @@ for row, (id, artist, title, twitter) in enumerate(rows):
 
   playlist[id] = (artist, title, twitter)
 
-output = open('db/playlist.pkl', 'wb')
+output = open('../db/playlist.pkl', 'wb')
 
 pickle.dump(playlist, output)
 output.close()

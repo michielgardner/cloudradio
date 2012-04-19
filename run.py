@@ -23,13 +23,13 @@ s.open()
 last_track = None
 
 while True:
-  files = os.listdir('mp3')
+  files = os.listdir('../mp3')
   track = random.choice(files) # choose random track
 
   if track == last_track:
     continue # don't play the same track twice
 
-  data = open('db/playlist.pkl', 'rb')
+  data = open('../db/playlist.pkl', 'rb')
   playlist = pickle.load(data)
   
   data.close()
@@ -39,7 +39,7 @@ while True:
   except KeyError: # we don't have metadata for this mp3
     continue
 
-  f = open('mp3/' + track)
+  f = open('../mp3/' + track)
 
   s.set_metadata({'song': 'Now on %s: %s - %s' % (config['name'], artist, title)})
 

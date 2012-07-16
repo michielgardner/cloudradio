@@ -66,8 +66,10 @@ while True: # endless loop to stay on air ;-)
   '''
 
   f = open('../mp3/' + track)
+  metadata = 'Now on %s: %s - %s' % (config['name'], artist, title)
 
-  s.set_metadata({'song': 'Now on %s: %s - %s' % (config['name'], artist, title)})
+  print metadata
+  s.set_metadata({'song': metadata})
 
   while True: # play the track
     buf = f.read(4096)

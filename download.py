@@ -15,7 +15,11 @@ Wait for queued tracks, added by queue.py
 b = beanstalkc.Connection()
 
 while True:
-  job = b.reserve()
+  job = b.reserve(timeout = 0)
+
+  if job is None:
+    break
+
   id, artist, title, twitter = pickle.loads(job.body)
 
   if os.path.isfile('../mp3/%s.mp3' % id) is True: # don't download files that already exist

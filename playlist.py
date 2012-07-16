@@ -12,7 +12,7 @@ import simplejson as json
 Download the latest playlist table
 
 '''
-https://www.googleapis.com/fusiontables/v1/query?sql=SELECT%20*%20FROM%20&key=%s
+
 table = requests.get('https://www.googleapis.com/fusiontables/v1/query?sql=' + urllib.quote_plus('SELECT * FROM %s' % config['table']))
 rows = json.loads(table.content)['rows']
 

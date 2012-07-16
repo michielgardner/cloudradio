@@ -13,7 +13,7 @@ Download the latest playlist table
 
 '''
 
-table = requests.get('https://www.googleapis.com/fusiontables/v1/query?sql=' + urllib.quote_plus('SELECT * FROM %s' % config['table']))
+table = requests.get('https://www.googleapis.com/fusiontables/v1/query?sql=' + urllib.quote_plus('SELECT * FROM %s' % config['table']) + '&key=' + config['google_key'])
 rows = json.loads(table.content)['rows']
 
 

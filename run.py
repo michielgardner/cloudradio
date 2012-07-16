@@ -5,8 +5,13 @@ import random
 import pickle
 from config import config
 
-s = shout.Shout()
+'''
 
+Shoutcast/Icecast settings; to configure, edit config.py
+
+'''
+
+s = shout.Shout()
 s.host = config['icecast_host']
 s.port = config['icecast_port']
 s.user = config['icecast_user']
@@ -22,12 +27,26 @@ s.open()
 
 last_track = None
 
-while True:
-  files = os.listdir('../mp3')
+while True: # endless loop to stay on air ;-)
+
+  '''
+
+  Choose a random MP3 from the music directory 
+
+  '''
+
+  files = os.listdir('../mp3') # create a list of all mp3s
   track = random.choice(files) # choose random track
 
   if track == last_track:
     continue # don't play the same track twice
+
+
+  '''
+
+  Get metadata for this track
+
+  '''
 
   data = open('../db/playlist.pkl', 'rb')
   playlist = pickle.load(data)
@@ -38,6 +57,13 @@ while True:
     artist, title, twitter = playlist[track.split('.')[0]]
   except KeyError: # we don't have metadata for this mp3
     continue
+
+
+  '''
+
+  Load the MP3 and play it
+
+  '''
 
   f = open('../mp3/' + track)
 
@@ -51,8 +77,16 @@ while True:
 
     s.send(buf)
     s.sync()
+
   f.close()
 
   last_track = track
 
-s.close()
+
+  '''
+
+  Finished playing this track, go to the next one
+
+  '''
+
+s.close() # just to be sure, but we should never end up here

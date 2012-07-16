@@ -1,0 +1,13 @@
+INSTALL:
+
+1) Install Icecast server WITH mp3 support!
+
+2) Deploy the code
+
+$ sudo pip install --upgrade -r requirements.txt
+$ fab deploy
+
+3) Add to crontab
+
+* * * * * /bin/bash -l -c 'if ! (ps -ef | grep -v grep | grep '\''Tweeter1'\'' >/dev/null); then cd /home/influence/radio/current/ &&  ./tweeter.py Tweeter1 &>> tweeter.log & fi'
+* * * * * /bin/bash -l -c 'if ! (ps -ef | grep -v grep | grep '\''Play1'\'' >/dev/null); then cd /home/influence/radio/current/ &&  ./play.py Play1 &>> play.log & fi'

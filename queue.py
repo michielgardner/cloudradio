@@ -2,6 +2,12 @@
 import pickle
 import beanstalkc
 
+'''
+
+Get all playlist data and create a Beanstalk job for every track
+
+'''
+
 b = beanstalkc.Connection()
 data = open('../db/playlist.pkl', 'rb')
 playlist = pickle.load(data)

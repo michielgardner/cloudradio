@@ -34,6 +34,11 @@ while True:
   '''
 
   track = requests.get('http://api.soundcloud.com/tracks/%s/stream?consumer_key=%s' % (id, config['consumer_key']))
+
+  if track.status_code != 200:
+    job.delete()
+    continue
+
   output = open('/tmp/%s.mp3' % id, 'wb')
   chunks = track.iter_content(chunk_size=1048576)
 

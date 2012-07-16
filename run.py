@@ -69,7 +69,7 @@ while True: # endless loop to stay on air ;-)
   metadata = 'Now on %s: %s - %s' % (config['name'], artist, title)
 
   print metadata
-  s.set_metadata({'song': metadata})
+  s.set_metadata({'song': str(metadata)})
 
   while True: # play the track
     buf = f.read(4096)

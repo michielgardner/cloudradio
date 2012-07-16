@@ -5,15 +5,16 @@ import csv
 import pickle
 from config import config
 from cStringIO import StringIO
+import simplejson as json
 
 '''
 
 Download the latest playlist table
 
 '''
-
-table = requests.get('https://www.google.com/fusiontables/api/query?sql=' + urllib.quote_plus('SELECT * FROM %s' % config['table']))
-rows = csv.reader(StringIO(table.content))
+https://www.googleapis.com/fusiontables/v1/query?sql=SELECT%20*%20FROM%20&key=%s
+table = requests.get('https://www.googleapis.com/fusiontables/v1/query?sql=' + urllib.quote_plus('SELECT * FROM %s' % config['table']))
+rows = json.loads(table.content)['rows']
 
 
 '''
@@ -24,10 +25,7 @@ Insert the track metadata into a dictionary
 
 playlist = {}
 
-for row, (id, artist, title, twitter) in enumerate(rows): # loop through all tracks
-  if row == 0:
-    continue # skip first row
-
+for (id, artist, title, twitter) in rows: # loop through all tracks
   playlist[id] = (artist, title, twitter) # store the track metadata in a dictionary
 
 
